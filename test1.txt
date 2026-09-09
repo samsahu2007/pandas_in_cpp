@@ -1,9 +1,0 @@
-Female Female Male Female Male Female Female Female Male Female 
-80 54 28 36 76 20 44 79 42 32 
-0 0 0 0 1 0 0 0 0 0 
-1 0 0 0 1 0 0 0 0 0 
-never No Info never current current never never No Info never never 
-25.19 27.32 27.32 23.45 20.14 27.32 19.31 23.86 33.64 27.32 
-6.6 6.6 5.7 5 4.8 6.6 6.5 5.7 4.8 5 
-140 80 158 155 155 85 200 85 145 100 
-0 0 0 0 0 0 1 0 0 0 

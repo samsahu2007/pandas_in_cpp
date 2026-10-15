@@ -49,7 +49,6 @@ namespace DataFrame{
                 continue;
             }
             else if(s[i]=='.'){
-                if(seen_digit!=1) return "string";
                 ++ dot_count;
             }
             else{

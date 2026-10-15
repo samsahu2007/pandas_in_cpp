@@ -25,8 +25,8 @@ namespace DataFrame{
     string check_type(string & s){
         int str_size = s.size();
         size_t l = 0, r = str_size;
-        while(l<r && s[l]==' ') l++;
-        while(r>l && s[r-1]==' ') r--; 
+        while(l<r && isspace((unsigned char)s[l])) l++;
+        while(r>l && isspace((unsigned char)s[r-1])) r--; 
 
         if(l>0 || r<str_size){
             string new_s = s.substr(l, r-l);

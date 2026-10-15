@@ -1,13 +1,13 @@
-Start testing: Oct 15 20:44 IST
+Start testing: Oct 15 20:46 IST
 ----------------------------------------------------------
 1/1 Testing: RunUnitTests
 1/1 Test: RunUnitTests
 Command: "/home/samriddha/Mini-Project/build/unit_tests"
 Directory: /home/samriddha/Mini-Project/build
-"RunUnitTests" start time: Oct 15 20:44 IST
+"RunUnitTests" start time: Oct 15 20:46 IST
 Output:
 ----------------------------------------------------------
-Randomness seeded to: 2961791991
+Randomness seeded to: 1146878174
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 unit_tests is a Catch2 v3.4.0 host application.
@@ -32,8 +32,8 @@ assertions: 14 | 13 passed | 1 failed
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Failed.
-"RunUnitTests" end time: Oct 15 20:44 IST
+"RunUnitTests" end time: Oct 15 20:46 IST
 "RunUnitTests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Oct 15 20:44 IST
+End testing: Oct 15 20:46 IST

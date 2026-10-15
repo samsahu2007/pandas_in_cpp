@@ -27,12 +27,12 @@ if(BUILD_TESTING)
     enable_testing()
     add_test(NAME RunUnitTests COMMAND unit_tests)
 
-    add_custom_command(
-        TARGET unit_tests 
-        POST_BUILD
-        COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure -R RunUnitTests
-        COMMENT "Automatically running Catch2 unit tests..."
-    )
+    # add_custom_command(
+    #     # TARGET unit_tests 
+    #     # POST_BUILD
+    #     # COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure -R RunUnitTests
+    #     # COMMENT "Automatically running Catch2 unit tests..."
+    # )
 endif()
 
 # These tests need their own main

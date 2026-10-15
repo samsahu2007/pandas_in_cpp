@@ -15,6 +15,8 @@ namespace DataFrame{
         variant<vector<int>,vector<double>,vector<string>> * header_ref = nullptr;
     };
 
+    string check_type(string & s);
+
     class DataStruct{
         vector<header_type> header_vec;
         vector<string> df_type;
@@ -22,7 +24,7 @@ namespace DataFrame{
         long long row_num=0;
 
         DataStruct(){};
-        static string check_type( string & s);
+        friend string check_type( string & s);
         static bool init_columns(vector<ColumnData> & new_dataframe, vector<string> & d_type);
         static void parse_stream(ifstream & file,vector<vector<string>> & arr ,long long & row_num, bool & with_header,
                                         vector<string> & header);

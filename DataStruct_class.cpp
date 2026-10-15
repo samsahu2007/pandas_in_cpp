@@ -22,7 +22,7 @@ struct string_int_bundle{
 namespace DataFrame{
     //using ColumnData = std::variant<std::vector<int>, std::vector<double>, std::vector<std::string>>;
 
-    string DataStruct::check_type(string & s){
+    string check_type(string & s){
         int str_size = s.size();
         size_t l = 0, r = str_size;
         while(l<r && s[l]==' ') l++;
@@ -117,7 +117,7 @@ namespace DataFrame{
             int j=0;
             for(auto v : arr){
                 //if(j==0 && with_header ) continue;
-                string data_type = DataFrame::DataStruct:: check_type(v[i]);
+                string data_type = DataFrame::check_type(v[i]);
                 if(prev_data_type=="")  prev_data_type=data_type;
                 else if(prev_data_type==data_type);
                 else{

@@ -1,0 +1,22 @@
+Start testing: Oct 15 19:53 IST
+----------------------------------------------------------
+1/1 Testing: RunUnitTests
+1/1 Test: RunUnitTests
+Command: "/home/samriddha/Mini-Project/build/unit_tests"
+Directory: /home/samriddha/Mini-Project/build
+"RunUnitTests" start time: Oct 15 19:53 IST
+Output:
+----------------------------------------------------------
+Randomness seeded to: 347018648
+===============================================================================
+All tests passed (6 assertions in 2 test cases)
+
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"RunUnitTests" end time: Oct 15 19:53 IST
+"RunUnitTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 15 19:53 IST

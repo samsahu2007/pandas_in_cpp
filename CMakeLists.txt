@@ -7,23 +7,32 @@ target_sources(app
     PRIVATE
         DataStruct_class.cpp
 )
+
+target_include_directories(app PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
 option(BUILD_TESTING "Enable testing and build tests" OFF)
 
-if()
+if(BUILD_TESTING)
     # These tests can use the Catch2-provided main
     find_package(Catch2 3 REQUIRED)
 
-    add_executable(tests)
-    target_sources(tests 
+    add_executable(unit_tests)
+    target_sources(unit_tests 
         PRIVATE
-            app
             Tests.cpp
     )
 
-    target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
+    target_link_libraries(unit_tests PRIVATE Catch2::Catch2WithMain app)
 
     enable_testing()
     add_test(NAME RunUnitTests COMMAND unit_tests)
+
+    add_custom_command(
+        TARGET unit_tests 
+        POST_BUILD
+        COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure -R RunUnitTests
+        COMMENT "Automatically running Catch2 unit tests..."
+    )
 endif()
 
 # These tests need their own main

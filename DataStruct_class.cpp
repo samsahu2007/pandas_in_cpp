@@ -28,7 +28,7 @@ namespace DataFrame{
         while(l<r && s[l]==' ') l++;
         while(r>l && s[r-1]==' ') r--; 
 
-        if(l>0 || r<str_size-1){
+        if(l>0 || r<str_size){
             string new_s = s.substr(l, r-l);
             s = new_s;
         }

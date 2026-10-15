@@ -1,22 +1,39 @@
-Start testing: Oct 15 19:53 IST
+Start testing: Oct 15 20:44 IST
 ----------------------------------------------------------
 1/1 Testing: RunUnitTests
 1/1 Test: RunUnitTests
 Command: "/home/samriddha/Mini-Project/build/unit_tests"
 Directory: /home/samriddha/Mini-Project/build
-"RunUnitTests" start time: Oct 15 19:53 IST
+"RunUnitTests" start time: Oct 15 20:44 IST
 Output:
 ----------------------------------------------------------
-Randomness seeded to: 347018648
+Randomness seeded to: 2961791991
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+unit_tests is a Catch2 v3.4.0 host application.
+Run with -? for options
+
+-------------------------------------------------------------------------------
+check_type() with double is checked
+-------------------------------------------------------------------------------
+/home/samriddha/Mini-Project/Tests.cpp:38
+...............................................................................
+
+/home/samriddha/Mini-Project/Tests.cpp:42: FAILED:
+  REQUIRE( DataFrame::check_type(s) == "double" )
+with expansion:
+  "string" == "double"
+
 ===============================================================================
-All tests passed (6 assertions in 2 test cases)
+test cases:  3 |  2 passed | 1 failed
+assertions: 14 | 13 passed | 1 failed
 
 <end of output>
-Test time =   0.01 sec
+Test time =   0.00 sec
 ----------------------------------------------------------
-Test Passed.
-"RunUnitTests" end time: Oct 15 19:53 IST
+Test Failed.
+"RunUnitTests" end time: Oct 15 20:44 IST
 "RunUnitTests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Oct 15 19:53 IST
+End testing: Oct 15 20:44 IST

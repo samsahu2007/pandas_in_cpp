@@ -1,0 +1,3 @@
+/home/samriddha/Mini-Project/build/CMakeFiles/app.dir
+/home/samriddha/Mini-Project/build/CMakeFiles/edit_cache.dir
+/home/samriddha/Mini-Project/build/CMakeFiles/rebuild_cache.dir

@@ -22,15 +22,46 @@ struct string_int_bundle{
 namespace DataFrame{
     //using ColumnData = std::variant<std::vector<int>, std::vector<double>, std::vector<std::string>>;
 
-    string DataStruct::check_type( string s){
-        int i=0;
-        if (s[0]=='-')  i=1;
-        for(;i<s.size();++i){
-            if(isdigit(s[i]))   continue;
-            else if(s[i]=='.')  return "double";
-            else return "string";
+    string DataStruct::check_type(string & s){
+        int str_size = s.size();
+        size_t l = 0, r = str_size;
+        while(l<r && s[l]==' ') l++;
+        while(r>l && s[r-1]==' ') r--; 
+
+        if(l>0 || r<str_size-1){
+            string new_s = s.substr(l, r-l);
+            s = new_s;
         }
-        return "int";
+
+        if(s.size() == 0)
+            return "NaN";
+        int i=0, seen_digit = 0;
+        if (s[0]=='-' || s[0] == '+'){
+            if(s.size()==1)
+                return "string";
+            else 
+                i = 1;
+        }
+        int dot_count = 0;
+        for(;i<s.size();++i){
+            if(isdigit(s[i])){
+                seen_digit=1;
+                continue;
+            }
+            else if(s[i]=='.'){
+                if(seen_digit!=1) return "string";
+                ++ dot_count;
+            }
+            else{
+                return "string";
+            }
+        }
+        if(seen_digit==1 && dot_count == 0)
+            return "int";
+        else if(seen_digit == 1 && dot_count == 1)
+            return "double";
+        else 
+            return "string";
     }
 
     bool DataStruct::init_columns(vector<ColumnData> & new_dataframe, vector<string> & d_type){

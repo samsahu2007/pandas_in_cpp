@@ -22,6 +22,8 @@ TEST_CASE("check_type() is checked", "[check_type()]"){
     CHECK(DataFrame::check_type(s) == "string");
     s= "abc12";
     CHECK(DataFrame::check_type(s) == "string");
+    s= "0x1F";
+    CHECK(DataFrame::check_type(s) == "string");
     INFO("hi1");
 }
 

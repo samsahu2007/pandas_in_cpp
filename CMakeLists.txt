@@ -10,7 +10,7 @@ target_sources(app
 
 target_include_directories(app PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-option(BUILD_TESTING "Enable testing and build tests" OFF)
+option(BUILD_TESTING "Enable testing and build tests" ON)
 
 if(BUILD_TESTING)
     # These tests can use the Catch2-provided main

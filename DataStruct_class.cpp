@@ -161,18 +161,18 @@ namespace DataFrame{
         
         if(!file.is_open()) throw invalid_argument("File cannot be opened");
 
-        DataStruct * the_data = new DataStruct;
+        // DataStruct * the_data = new DataStruct;
         vector<vector<string>> arr;
         string line;
         vector<string> header;
 
-        int64_t & row_num = the_data->row_num;
-        parse_stream(file, arr, row_num, with_header, header);
+        int64_t & the_row_num = row_num;
+        parse_stream(file, arr, the_row_num, with_header, header);
 
-        vector<string> & d_type = the_data -> df_type;
+        vector<string> & d_type = df_type;
         init_data_types(d_type, arr);
 
-        vector<ColumnData> & new_dataframe = the_data -> data;
+        vector<ColumnData> & new_dataframe = data;
         init_columns(new_dataframe, d_type);
 
         populate_data_after_checking_type(arr, d_type, new_dataframe);
@@ -180,9 +180,8 @@ namespace DataFrame{
         for(auto x: header){
             header_type a;
             a.header_name = x;
-            the_data -> header_vec.push_back(a);
+            header_vec.push_back(a);
         }
-        return *the_data;
     }    
 
     void DataStruct:: display(){
@@ -195,7 +194,7 @@ namespace DataFrame{
         }
         cout << "\n";
         vector<variant<vector<int64_t>,vector<double>,vector<string>>> df = data;
-        for(int64_t j=0; j< min((long long)10, row_num);++j){
+        for(int64_t j=0; j< min((int64_t)10, row_num);++j){
             for(int64_t i=0; i<df.size(); ++i){
                 visit([&j](auto & col){
                     cout << col[j] <<" ";

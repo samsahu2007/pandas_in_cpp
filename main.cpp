@@ -48,10 +48,9 @@ int main(){
      
     // if(!file.is_open()) throw invalid_argument("File cannot be opened");
 
-    DataFrame::DataStruct & my_data = DataFrame::DataStruct::initialize_df("diabetes_1.csv", true);
+    DataFrame::DataStruct my_data = DataFrame::DataStruct("diabetes_1.csv", true);
     my_data.display();
 
-    //delete &my_data;  
     cout << my_data.get_row_count() << endl;
     cout << "\n\n\n\n";
     DataFrame::DataStruct one_hot_encoded = my_data.one_hot_encoding("smoking_history");
@@ -59,5 +58,4 @@ int main(){
     
     cout << covariance<double, int>(get<vector<double>>(my_data.get_column("age")), get<vector<int>>(my_data.get_column("blood_glucose_level"))) << endl;
     
-    delete &my_data;
 }

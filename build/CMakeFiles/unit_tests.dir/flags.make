@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/home/samriddha/Mini-Project
 
-CXX_FLAGS = 
+CXX_FLAGS = -g
 

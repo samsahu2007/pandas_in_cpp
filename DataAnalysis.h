@@ -1,3 +1,6 @@
+#ifndef DATA_ANALYSIS_H
+#define DATA_ANALYSIS_H
+
 #include<iostream>
 #include<vector>
 #include<numeric>
@@ -44,3 +47,5 @@ class DataAnalysis{
             return dot_prod/(x.size()-1); 
         }
 };
+
+#endif

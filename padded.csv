@@ -1,0 +1,5 @@
+id,score,name
+ 1,  2.5 ,alice
+2 ,3.0,bob
+  3  ,-1.5,carol
+3000000000,0.5,dave

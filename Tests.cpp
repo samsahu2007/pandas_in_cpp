@@ -64,8 +64,9 @@ TEST_CASE("Data Ingestion", "[data_ingestion]"){
     REQUIRE(my_data.get_row_count()>0);
 
     SECTION("Execution of one_hot encoding"){
-        DataFrame::DataStruct one_hot_encoded = my_data.one_hot_encoding("smoking_history");
+        DataFrame::DataStruct & one_hot_encoded = my_data.one_hot_encoding("smoking_history");
         REQUIRE(one_hot_encoded.get_row_count() == my_data.get_row_count());
+        delete &one_hot_encoded;
     }
 
     SECTION("Covariance check"){
@@ -74,5 +75,24 @@ TEST_CASE("Data Ingestion", "[data_ingestion]"){
         double calculated_covariance = DataAnalysis::covariance<double, int64_t>(age_col, glucose_col);
         CHECK_THAT(calculated_covariance, Catch::Matchers::WithinRel(-18.7, 0.01));
     }
+}
 
+TEST_CASE("Missing values", "[missing values]"){
+    DataFrame::DataStruct my_data = DataFrame::DataStruct("missing.csv", true);
+    REQUIRE(my_data.get_row_count()>0);
+}
+
+TEST_CASE("Mixed values", "[mixed values]"){
+    DataFrame::DataStruct my_data = DataFrame::DataStruct("mixed.csv", true);
+    REQUIRE(my_data.get_row_count()>0);
+}
+
+TEST_CASE("Padded values", "[padded values]"){
+    DataFrame::DataStruct my_data = DataFrame::DataStruct("padded.csv", true);
+    REQUIRE(my_data.get_row_count()>0);
+}
+
+TEST_CASE("Full empty column", "[empty_column]"){
+    DataFrame::DataStruct my_data = DataFrame::DataStruct("empty_col.csv", true);
+    REQUIRE(my_data.get_row_count()>0);
 }

@@ -73,6 +73,10 @@ namespace DataFrame{
                 new_dataframe.push_back(vector<int64_t>());
             else if(df_type=="double")
                 new_dataframe.push_back(vector<double>());
+            else if(df_type=="NaN"){
+                cout << "U may want to check column" + to_string(i+1) + "as it contains only empty values";
+                new_dataframe.push_back(vector<string>());
+            }
             else{
                 new_dataframe.push_back(vector<string>());
                 cout << "Why did it reach here? Each vector must be double/int64_t/string" << endl;
@@ -115,14 +119,24 @@ namespace DataFrame{
         for(int64_t i=0; i < arr[0].size(); ++i){
             string prev_data_type ="";
             int64_t j=0;
-            for(auto v : arr){
+            for(auto & v : arr){
                 //if(j==0 && with_header ) continue;
                 string data_type = DataFrame::check_type(v[i]);
                 if(prev_data_type=="")  prev_data_type=data_type;
                 else if(prev_data_type==data_type);
+                else if(data_type=="string")
+                    prev_data_type="string";
+                else if(data_type=="double" && prev_data_type!="string")
+                    prev_data_type="double";
+                else if(data_type=="double" && prev_data_type=="string");
+                else if(data_type=="int64_t" && prev_data_type!="double" && prev_data_type!="string")
+                    prev_data_type="int64_t";
+                else if(data_type=="int64_t" && (prev_data_type=="double" || prev_data_type=="string"));
+                // else if(data_type=="NaN" && prev_data_type!="int64_t" && prev_data_type!="double" && prev_data_type!="string")
+                //     prev_data_type="NaN";
                 else{
-                    string err_msg = "Row: " + to_string(i+1) + " Column: " 
-                                        + to_string(j+1) + "has corrupt value";
+                    string err_msg = "Row: " + to_string(j+1) + " Column: " 
+                                        + to_string(i+1) + "has corrupt/null value"+"prev_datatype: "+prev_data_type+ " datatype: "+data_type;
                     throw invalid_argument(err_msg);
                 }
                 j++;
@@ -138,7 +152,7 @@ namespace DataFrame{
             if(holds_alternative<vector<int64_t>>(new_dataframe[i])){
                 for( int64_t j=0; j< arr.size(); ++j){
                     vector<int64_t> & col = get<vector<int64_t>>(new_dataframe[i]);
-                    col.push_back(stoi(arr[j][i]));
+                    col.push_back(stoll(arr[j][i]));
                 }
             }
             else if(holds_alternative<vector<double>>(new_dataframe[i])){

@@ -22,6 +22,12 @@ if(BUILD_TESTING)
             Tests.cpp
     )
 
+    if((CMAKE_CXX_COMPILER_ID STREQUAL "GNU") OR
+        (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
+        target_compile_options(unit_tests PRIVATE -fsanitize=address,undefined -g)
+        target_link_options(unit_tests PRIVATE -fsanitize=address,undefined)    
+    endif()
+    
     target_link_libraries(unit_tests PRIVATE Catch2::Catch2WithMain app)
 
     enable_testing()

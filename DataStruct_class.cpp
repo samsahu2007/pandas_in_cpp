@@ -83,7 +83,7 @@ namespace DataFrame{
         return true;
     }
 
-    void DataStruct::parse_stream(ifstream & file,vector<vector<string>> & arr ,long long & row_num, bool & with_header,
+    void DataStruct::parse_stream(ifstream & file,vector<vector<string>> & arr ,int64_t & row_num, bool & with_header,
                                         vector<string> & header){
         string line;
         for(int64_t i=0; getline(file, line); ++i){
@@ -156,7 +156,7 @@ namespace DataFrame{
         }
     }
 
-    DataStruct & DataStruct::initialize_df(const string filename, bool with_header){
+    DataStruct::DataStruct(const string filename, bool with_header){
         ifstream file (filename);
         
         if(!file.is_open()) throw invalid_argument("File cannot be opened");
@@ -166,7 +166,7 @@ namespace DataFrame{
         string line;
         vector<string> header;
 
-        long long & row_num = the_data->row_num;
+        int64_t & row_num = the_data->row_num;
         parse_stream(file, arr, row_num, with_header, header);
 
         vector<string> & d_type = the_data -> df_type;

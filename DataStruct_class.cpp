@@ -9,21 +9,22 @@
 //#include "pandas_my.h"
 #include<typeinfo>
 #include<set>
+#include<cstdint>
 #include "DataStruct_class.h"
 
 
 using namespace std;
-using my_df = vector<variant<vector<int>,vector<double>,vector<string>>> ;
+using my_df = vector<variant<vector<int64_t>,vector<double>,vector<string>>> ;
 struct string_int_bundle{
     string name;
-    int index =0;
+    int64_t index =0;
 };
 
 namespace DataFrame{
-    //using ColumnData = std::variant<std::vector<int>, std::vector<double>, std::vector<std::string>>;
+    //using ColumnData = std::variant<std::vector<int64_t>, std::vector<double>, std::vector<std::string>>;
 
     string check_type(string & s){
-        int str_size = s.size();
+        int64_t str_size = s.size();
         size_t l = 0, r = str_size;
         while(l<r && isspace((unsigned char)s[l])) l++;
         while(r>l && isspace((unsigned char)s[r-1])) r--; 
@@ -35,14 +36,14 @@ namespace DataFrame{
 
         if(s.size() == 0)
             return "NaN";
-        int i=0, seen_digit = 0;
+        int64_t i=0, seen_digit = 0;
         if (s[0]=='-' || s[0] == '+'){
             if(s.size()==1)
                 return "string";
             else 
                 i = 1;
         }
-        int dot_count = 0;
+        int64_t dot_count = 0;
         for(;i<s.size();++i){
             if(isdigit(s[i])){
                 seen_digit=1;
@@ -56,7 +57,7 @@ namespace DataFrame{
             }
         }
         if(seen_digit==1 && dot_count == 0)
-            return "int";
+            return "int64_t";
         else if(seen_digit == 1 && dot_count == 1)
             return "double";
         else 
@@ -64,17 +65,17 @@ namespace DataFrame{
     }
 
     bool DataStruct::init_columns(vector<ColumnData> & new_dataframe, vector<string> & d_type){
-        for(int i=0; i<d_type.size();++i){
+        for(int64_t i=0; i<d_type.size();++i){
             string & df_type = d_type[i];
             if(df_type == "string")
                 new_dataframe.push_back(vector<string>());
-            else if(df_type == "int")
-                new_dataframe.push_back(vector<int>());
+            else if(df_type == "int64_t")
+                new_dataframe.push_back(vector<int64_t>());
             else if(df_type=="double")
                 new_dataframe.push_back(vector<double>());
             else{
                 new_dataframe.push_back(vector<string>());
-                cout << "Why did it reach here? Each vector must be double/int/string" << endl;
+                cout << "Why did it reach here? Each vector must be double/int64_t/string" << endl;
                 return false;
             }
         }
@@ -85,7 +86,7 @@ namespace DataFrame{
     void DataStruct::parse_stream(ifstream & file,vector<vector<string>> & arr ,long long & row_num, bool & with_header,
                                         vector<string> & header){
         string line;
-        for(int i=0; getline(file, line); ++i){
+        for(int64_t i=0; getline(file, line); ++i){
             stringstream ss(line);
             string cell;
             
@@ -99,7 +100,7 @@ namespace DataFrame{
                 header = row;
             }
             else if(!with_header && i==0){
-                for(int i=0; i< row.size(); ++i){
+                for(int64_t i=0; i< row.size(); ++i){
                     header.push_back(to_string(i+1));
                 }
             }
@@ -111,9 +112,9 @@ namespace DataFrame{
     }
 
     void DataStruct::init_data_types(vector<string> & d_type, vector<vector<string>> & arr){
-        for(int i=0; i < arr[0].size(); ++i){
+        for(int64_t i=0; i < arr[0].size(); ++i){
             string prev_data_type ="";
-            int j=0;
+            int64_t j=0;
             for(auto v : arr){
                 //if(j==0 && with_header ) continue;
                 string data_type = DataFrame::check_type(v[i]);
@@ -132,22 +133,22 @@ namespace DataFrame{
 
     void DataStruct::populate_data_after_checking_type(vector<vector<string>> & arr, vector<string> & d_type, 
                                                         vector<ColumnData> & new_dataframe){
-        for(int i=0; i < arr[0].size(); ++i){
+        for(int64_t i=0; i < arr[0].size(); ++i){
             //string data_type =d_type[i];
-            if(holds_alternative<vector<int>>(new_dataframe[i])){
-                for( int j=0; j< arr.size(); ++j){
-                    vector<int> & col = get<vector<int>>(new_dataframe[i]);
+            if(holds_alternative<vector<int64_t>>(new_dataframe[i])){
+                for( int64_t j=0; j< arr.size(); ++j){
+                    vector<int64_t> & col = get<vector<int64_t>>(new_dataframe[i]);
                     col.push_back(stoi(arr[j][i]));
                 }
             }
             else if(holds_alternative<vector<double>>(new_dataframe[i])){
-                for( int j=0; j< arr.size(); ++j){
+                for( int64_t j=0; j< arr.size(); ++j){
                     vector<double> & col = get<vector<double>>(new_dataframe[i]);
                     col.push_back(stod(arr[j][i]));
                 }
             }
             else if(holds_alternative<vector<string>>(new_dataframe[i])){
-                for( int j=0; j< arr.size(); ++j){
+                for( int64_t j=0; j< arr.size(); ++j){
                     vector<string> & col = get<vector<string>>(new_dataframe[i]);
                     col.push_back(arr[j][i]);
                 }
@@ -193,9 +194,9 @@ namespace DataFrame{
             cout << x << " " ;
         }
         cout << "\n";
-        vector<variant<vector<int>,vector<double>,vector<string>>> df = data;
-        for(int j=0; j< min((long long)10, row_num);++j){
-            for(int i=0; i<df.size(); ++i){
+        vector<variant<vector<int64_t>,vector<double>,vector<string>>> df = data;
+        for(int64_t j=0; j< min((long long)10, row_num);++j){
+            for(int64_t i=0; i<df.size(); ++i){
                 visit([&j](auto & col){
                     cout << col[j] <<" ";
                 }, df[i]);
@@ -204,8 +205,8 @@ namespace DataFrame{
         }
     }
 
-    variant<vector<int>,vector<double>,vector<string>>DataStruct::get_column(const string key){
-        int i=0;
+    variant<vector<int64_t>,vector<double>,vector<string>>DataStruct::get_column(const string key){
+        int64_t i=0;
         for(auto v: header_vec){
             if (v.header_name == key){
                 return data[i];
@@ -222,7 +223,7 @@ namespace DataFrame{
         }
         my_df & copy_df = data; 
         DataStruct * the_data = new DataStruct;
-        int jk = 0;
+        int64_t jk = 0;
         for(auto v: copy_df){
             if(holds_alternative<vector<string>>(v) && header[jk]==key){
                 set<string> s;
@@ -232,13 +233,13 @@ namespace DataFrame{
                 }
                 vector<string_int_bundle> temp;
 
-                int ppp=0;
-                int intial_size_data = (*the_data).data.size();
+                int64_t ppp=0;
+                int64_t intial_size_data = (*the_data).data.size();
                 //cout << "initial_size_data: "<< intial_size_data << endl;
                 for(string x: s){
                     header_type a;
                     string_int_bundle b;
-                    (*the_data).data.push_back(vector<int>(row_num, 0));
+                    (*the_data).data.push_back(vector<int64_t>(row_num, 0));
                     a.header_name = x;
                     b.name = x;
                     b.index = intial_size_data + ppp;
@@ -251,11 +252,11 @@ namespace DataFrame{
                 }
                 //cout << "Inserted " << ppp << " new vectors" << endl;
 
-                int vec_count =0;
+                int64_t vec_count =0;
                 for(string x: vec){
                     for(string_int_bundle p: temp){
                         if(p.name == x){
-                            vector<int> & str_vec = get<vector<int>>((*the_data).data[p.index]);
+                            vector<int64_t> & str_vec = get<vector<int64_t>>((*the_data).data[p.index]);
                             (str_vec)[vec_count]=1;
                                 // cout << x << endl;
                         }

@@ -8,11 +8,11 @@
 using namespace std;
 
 namespace DataFrame{
-    using ColumnData = std::variant<std::vector<int>, std::vector<double>, std::vector<std::string>>;
+    using ColumnData = std::variant<std::vector<int64_t>, std::vector<double>, std::vector<std::string>>;
 
     struct header_type{
         string header_name;
-        variant<vector<int>,vector<double>,vector<string>> * header_ref = nullptr;
+        variant<vector<int64_t>,vector<double>,vector<string>> * header_ref = nullptr;
     };
 
     string check_type(string & s);
@@ -20,7 +20,7 @@ namespace DataFrame{
     class DataStruct{
         vector<header_type> header_vec;
         vector<string> df_type;
-        vector<variant<vector<int>,vector<double>,vector<string>>> data;
+        vector<variant<vector<int64_t>,vector<double>,vector<string>>> data;
         long long row_num=0;
 
         DataStruct(){};
@@ -39,7 +39,7 @@ namespace DataFrame{
             vector<string> & get_df_type(){    //by reference so that no need to bother about
                 return df_type;                //separate setter functions for now
             };         
-            vector<variant<vector<int>,vector<double>,vector<string>>> & get_data(){
+            vector<variant<vector<int64_t>,vector<double>,vector<string>>> & get_data(){
                 return data;
             }; 
             long long get_row_count(){ 
@@ -51,7 +51,7 @@ namespace DataFrame{
             }
             static DataStruct & initialize_df(string filename, bool with_header);
             void display();
-            variant<vector<int>,vector<double>,vector<string>> get_column(const string key);
+            variant<vector<int64_t>,vector<double>,vector<string>> get_column(const string key);
             DataStruct & one_hot_encoding(const string key);
     };
 }

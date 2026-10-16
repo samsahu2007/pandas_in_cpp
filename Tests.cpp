@@ -27,16 +27,16 @@ TEST_CASE("check_type() is checked", "[check_type()]"){
     INFO("hi1");
 }
 
-TEST_CASE("check_type() with int is checked", "[check_type_int()]"){
+TEST_CASE("check_type() with int64_t is checked", "[check_type_int()]"){
     string s = "42";
     CAPTURE(s);
-    CHECK(DataFrame::check_type(s) == "int");
+    CHECK(DataFrame::check_type(s) == "int64_t");
     s = "    43";
-    CHECK(DataFrame::check_type(s) == "int");
+    CHECK(DataFrame::check_type(s) == "int64_t");
     s = "   43   ";
-    CHECK(DataFrame::check_type(s) == "int");
+    CHECK(DataFrame::check_type(s) == "int64_t");
     s= "007";
-    CHECK(DataFrame::check_type(s) == "int");
+    CHECK(DataFrame::check_type(s) == "int64_t");
 
     INFO("hi2");
 }

@@ -1,2 +1,0 @@
-/usr/bin/ar qc libapp.a CMakeFiles/app.dir/DataStruct_class.cpp.o
-/usr/bin/ranlib libapp.a
